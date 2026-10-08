@@ -244,28 +244,35 @@ void ShowAllClients() {
 	vector<stClient> vClient = LoadDataClientFromFile(ClientFile);
 	PrintAllClient(vClient);
 }
-void AddClient() {
-	cout << "\n==========================================\n";
-	cout << "\tAdd New Clients Screen \n";
-	cout << "==========================================\n";
-	cout << "Adding New Client :\n\n";
-	string AccountNumber = ReadAccountNumber();
-	vector<stClient> vClient = LoadDataClientFromFile(ClientFile);
+bool IsAccountNumberExists(vector<stClient>& vClient, string AccountNumber) {
 	for (stClient& C : vClient) {
-		while (AccountNumber == C.AccountNumber) {
-			cout << "Client with [" << AccountNumber << "] Already Exists Another Account Number ? ";
-				cin >> AccountNumber;
-		}
+		if (C.AccountNumber == AccountNumber)
+			return true;
 	}
-	char AddMore = 'y';
-	do {
-		stClient Client = ReadDataClient(AccountNumber);
-		string S1 = ConvertRecordToLine(Client, "#//#");
-		SaveDataClientToFile(ClientFile, S1);
-		cout << "Client Added Succesfully, Do You Want to Add More Clients? Y/N ? ";
-		cin >> AddMore;
-	} while (AddMore == 'y' || AddMore == 'Y');
+	return false;
 }
+void AddClient() {
+	
+		cout << "\n==========================================\n";
+		cout << "\tAdd New Clients Screen \n";
+		cout << "==========================================\n";
+		cout << "Adding New Client :\n\n";
+		char AddMore = 'y';
+		do {
+			vector<stClient> vClient = LoadDataClientFromFile(ClientFile);
+			string AccountNumber = ReadAccountNumber();
+			while (IsAccountNumberExists(vClient, AccountNumber)) {
+				cout << "Client with [" << AccountNumber << "] Already Exists, Enter Another Account Number ? ";
+				cin >> AccountNumber;
+			}
+			stClient Client = ReadDataClient(AccountNumber);
+			string S1 = ConvertRecordToLine(Client, "#//#");
+			SaveDataClientToFile(ClientFile, S1);
+			cout << "Client Added Successfully, Do You Want to Add More Clients? Y/N ? ";
+			cin >> AddMore;
+		} while (AddMore == 'y' || AddMore == 'Y');
+	}
+
 void DeleteClientScreen() {
 	cout << "\n==========================================\n";
 	cout << "\tDelete Client Screen \n";
