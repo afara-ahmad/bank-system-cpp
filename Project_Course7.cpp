@@ -28,7 +28,7 @@ enMainMenuOptions ReadMenuOptions() {
 	do {
 		cout << "Choose What Do You want to do ? [1 to 7]?";
 		cin >> Number;
-	} while (Number < 0 || Number>7);
+	} while (Number < 1 || Number>7);
 	return (enMainMenuOptions)Number;
 }
 enTransAction ReadTransActionMenu() {
@@ -36,7 +36,7 @@ enTransAction ReadTransActionMenu() {
 	do {
 		cout << "Choose What Do You want to do ? [1 to 4]?";
 		cin >> Number;
-	} while (Number < 0 || Number>4);
+	} while (Number < 1 || Number>4);
 	return (enTransAction)Number;
 }
 stClient ReadDataClient(string AccountNumber) {
@@ -479,43 +479,7 @@ void TotalBalancesScreen() {
 	vector<stClient> vClient = LoadDataClientFromFile(ClientFile);
 	PrintTotalBalance(vClient);
 }
-//void MainMenuOption() {
-//	ShowMainMenu();
-//	enMainMenuOptions Option = ReadMenuOptions();
-//	switch (Option) {
-//	case enMainMenuOptions::ShowClientList:
-//		system("cls");
-//		ShowAllClients();
-//		GoBack();
-//		
-//		break;
-//	case enMainMenuOptions::AddNewClient:
-//		system("cls");
-//		AddClient();
-//		GoBack();
-//		break;
-//	case enMainMenuOptions::Delete:
-//		system("cls");
-//		DeleteClientScreen();
-//		GoBack();
-//		break;
-//	case enMainMenuOptions::Update:
-//		system("cls");
-//		UpdateClientScreen();
-//		GoBack();
-//		break;
-//	case enMainMenuOptions::Find:
-//		system("cls");
-//		FindClient();
-//		GoBack();
-//		break;
-//	case enMainMenuOptions::enExit:
-//		system("cls");
-//		Exits();
-//		GoBack();
-//		break;
-//	}
-//}
+
 
 
 
@@ -561,7 +525,7 @@ void MainMenuOption() {
 	case enMainMenuOptions::enExit:
 		system("cls");
 		Exits();
-		GoBack();
+		
 		break;
 	}
 }
